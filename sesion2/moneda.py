@@ -11,7 +11,7 @@ def tira(p):
 data=['s','s','s','a','s','s','a','a','s','s']
 
 iters=100
-punishment=0.50
+punishment=0.1
 model=0.5
 models=[]
 models_=[]

@@ -3,6 +3,7 @@ Curso de aprendizaje automático
 
 Código para las sesiones del curso de aprendizaje automático
 
+http://turing.iimas.unam.mx/~ivanvladimir/es/content/teach/curso_aprendizaje_automatico.html
 
 
 Sesión 1

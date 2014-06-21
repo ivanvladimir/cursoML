@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 
 def tira(p):
@@ -7,44 +8,32 @@ def tira(p):
         return "a"
 
 
-ejemplos_1=['s','s','s','a','s','s','a','a','s','s']
-ejemplos_2=['s', 's', 'a', 'a', 's', 'a', 's', 's', 's', 'a', 's', 's', 's',
-'a', 's', 's', 's', 'a', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's',
-'a', 'a', 's', 's', 's', 's', 's', 's', 's', 's', 'a', 's', 's', 's', 's', 's',
-'s', 's', 's', 'a', 's', 's', 's', 's', 's', 's', 's', 'a', 's', 'a', 'a', 's',
-'s', 's', 's', 's', 's', 'a', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's',
-'s', 's', 's', 's', 's', 'a', 's', 's', 's', 's', 'a', 's', 'a', 'a', 's', 's',
-'s', 's', 's', 'a', 's', 'a', 's']
-
-ejemplos=ejemplos_2
+data=['s','s','s','a','s','s','a','a','s','s']
 
 iters=100
+punishment=0.50
 model=0.5
 models=[]
 models_=[]
 for i in range(iters):
-    for e in ejemplos:
+    for e in data:
         actual=tira(model)
         if actual != e:
             if e=="s":
-                model+=0.1
+                model+=punishment
             else:
-                model-=0.1
+                model-=punishment
         models.append(model)
         models_.append(sum(models)/len(models))
 
 
-print "Model",model
-print "Len models", len(models)
-print "Avg. model", models_[-1]
-print "P(sol)", models_[-1]
-print "P(aguila)",1-models_[-1]
 
+print "Iteraciones       :",iters
+print "Total ejemplos    :",len(data)
+print "Valor castigo     :",punishment
+print "Último modelo     :",model
+print "Modelos calculados:", len(models)
+print "Modelo promedio   :", models_[-1]
+print "P(sol)            :", models_[-1]
+print "P(aguila)         :",1-models_[-1]
 
-import matplotlib.pyplot as plt
-
-plt.clf()
-x=range(len(models))
-#plt.plot(x,models)
-plt.plot(x,models_)
-plt.show()

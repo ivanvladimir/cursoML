@@ -2,13 +2,12 @@ import random
 
 random.seed()
 
-tries=100
+tries=10
 bias=.8
 coins=[]
 
 for i in range(tries):
     n=random.random()
-    print n
     if n < bias:
         coins.append('s')
     else:

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 lista=['hola','mundo']
 print "Iterando listas"
@@ -23,7 +24,7 @@ for k,v in diccionario.items():
     print "Valor:",v
 
 print "Iterando el diccionario directamente",diccionario
-for k,v in diccionario.itermitems():
+for k,v in diccionario.iteritems():
     print "Llave:",i
     print "Valor:",v
 

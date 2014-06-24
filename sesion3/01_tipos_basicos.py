@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Esto es un comentario
 print "Esto es una cadena con comillas dobles"
@@ -6,7 +7,7 @@ print 'Esto es otra cadena con comillas simples'
 
 
 print "Esto es un booleano verdadero",True
-print "Esto es un booleano false",False
+print "Esto es un booleano faloo",False
 
 print "Esto es un entero",123
 print "Esto es un flotante",123.456
@@ -42,7 +43,7 @@ print "Estos son los dos primeros valores",tupla[0:1]
 print "Esta es la longitud de la lista",len(tupla)
 print "La tupla no se puede aumentar o cambiar"
 
-diccionario={"hola":1,"mundo":2}
+diccionario={"hola":3,"mundo":2,"!":1}
 print "Este es un diccionario", diccionario
 print "Este es un elemento del diccionario",diccionario['mundo']
 print "Este es otro elemento del diccionario",diccionario['hola']

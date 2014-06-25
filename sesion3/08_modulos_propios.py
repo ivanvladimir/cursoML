@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import mimodulo
 
@@ -13,7 +14,5 @@ print "La suma de la lista",lista,"es",mimodulo.suma_lista(lista)
 lista=range(200)
 print "La suma de la lista",lista,"es",mimodulo.suma_lista(lista)
 
-lista=range(20)
 print "El número de fibonacci para 10 es",mimodulo.fib(10)
-lista=range(200)
 print "El número de fibonacci para 20 es",mimodulo.fib(20)

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Esta función no regresa ningún valor, pero hace algo
 def print_percentage(val):

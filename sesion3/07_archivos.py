@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 #Generando un archivo
 archivo=open('tmp','w')
@@ -15,7 +16,7 @@ archivo.close()
 #Arreglando problema con linea
 archivo=open('tmp')
 for linea in archivo:
-    line=linea.strip()
+    linea=linea.strip()
     print linea
 archivo.close()
 

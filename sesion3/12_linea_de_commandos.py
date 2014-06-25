@@ -1,8 +1,9 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import argparse
 
-p = argparse.ArgumentParser("Author identification")
+p = argparse.ArgumentParser("Ejemplo")
 p.add_argument("Archivo_1",default=None,
             action="store", help="Archivo Uno")
 p.add_argument("Archivo_2",default=None,
@@ -10,7 +11,7 @@ p.add_argument("Archivo_2",default=None,
 p.add_argument("-o", "--opcion1",default=None,type=str,
             action="store", dest="op_1",
             help="Opcion 2")
-p.add_argument("", "--opcion2",default="Valor2",type=str,
+p.add_argument("--opcion2",default="Valor2",type=str,
             action="store", dest="op_2",
             help="Opcion 2")
 p.add_argument("-n", "--nueva_opcion",default="Valor3",type=str,

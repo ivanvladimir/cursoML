@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Esta función no regresa ningún valor, pero hace algo
 def print_percentage(val):
@@ -30,9 +31,7 @@ print "La suma de la lista",lista,"es",suma_lista(lista)
 lista=range(200)
 print "La suma de la lista",lista,"es",suma_lista(lista)
 
-lista=range(20)
 print "El número de fibonacci para 10 es",fib(10)
-lista=range(200)
 print "El número de fibonacci para 20 es",fib(20)
 
 

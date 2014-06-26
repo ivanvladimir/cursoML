@@ -29,8 +29,18 @@ if __name__ == '__main__':
 
     print help_message
 
-    hog = cv2.HOGDescriptor()
-    hog.setSVMDetector( cv2.HOGDescriptor_getDefaultPeopleDetector() )
+    #hog = cv2.HOGDescriptor()
+    #hog.setSVMDetector( cv2.HOGDescriptor_getDefaultPeopleDetector() )
+
+    hog = cv2.HOGDescriptor((48,48),(16,16),(8,8),(8,8),9)
+    vals=[]
+    for line in open('48x48.txt'):
+        line=line.strip()
+        bits=line.split()
+        for bit in bits:
+            vals.append(float(bit))
+    vals=np.array(vals)
+    hog.setSVMDetector(vals)
 
     for fn in it.chain(*map(glob, sys.argv[1:])):
         print fn, ' - ',
@@ -40,7 +50,11 @@ if __name__ == '__main__':
             print 'loading error'
             continue
 
-        found, w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
+        found, w = hog.detectMultiScale(img,
+                hitThreshold = 1.4,
+                winStride=(8,8),
+                padding=(0,0),
+                scale=1.04)
         found_filtered = []
         for ri, r in enumerate(found):
             for qi, q in enumerate(found):

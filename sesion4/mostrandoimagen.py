@@ -6,7 +6,7 @@ import cv2
 import argparse
 
 # Se configura los argumentos de la línea de comandos
-p = argparse.ArgumentParser("Extrae una region de una imagen")
+p = argparse.ArgumentParser("mostrandoimagen.py")
 p.add_argument("archivo",default=None,
             action="store", help="Nombre de archivo")
 opts = p.parse_args()

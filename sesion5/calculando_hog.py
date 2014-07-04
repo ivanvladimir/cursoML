@@ -12,18 +12,24 @@ p.add_argument("directorio",default=None,
             action="store", help="directorio de archivo a procesar")
 opts = p.parse_args()
 
+# Se lista el contenido de un directorio
 listing=os.listdir(opts.directorio)
+
+# Se filtra del directorio todo lo que no sea imagen (jpg o png)
 listing=["{0}/{1}".format(opts.directorio,namefile) 
                         for namefile in listing if namefile.endswith('jpg') 
                                                 or namefile.endswith('png')]
 
+# Se configura al descriptor
 hog = cv2.HOGDescriptor((48,48),(16,16),(8,8),(8,8),9)
 
+# Por cada archivo en el directorio
 for filename in listing:
     # Se abre la imagen
     img = cv2.imread(filename)
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-    des=hog.compute(gray)
+    # Se calcula el descriptor
+    des=hog.compute(img)
 
-    print "Size of descriptor",des.size
+    # Se imprime información del descriptor
+    print "La imagen se redujo a",des.size

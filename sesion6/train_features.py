@@ -52,7 +52,7 @@ for filename in listing:
 
     height, width, depth = img.shape
 
-    for i in range(2):
+    for i in range(10):
         h=random.randint(0,height-48)
         w=random.randint(0,width-48)
 

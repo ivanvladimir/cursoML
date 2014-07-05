@@ -3,13 +3,6 @@
 import numpy as np
 import cv2
 import argparse
-import codecs
-
-from yaml import load, dump, add_constructor
-try:
-    from yaml import CLoader as Loader, CDumper as Dumper
-except ImportError:
-    from yaml import Loader, Dumper
 
 def inside(r, q):
     rx, ry, rw, rh = r
@@ -24,27 +17,7 @@ def draw_detections(img, rects, thickness = 1):
         cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0, 255, 0), thickness)
 
 
-def get_primal_form(svm):
-    count = len(svm['support_vectors'])
-    df = svm['decision_functions']
-    alphas= df[0]['alpha']
-    rho = df[0]['rho']
-    var_count=svm['var_count']
-    support_vector=[0.0 for i in range(var_count)]
-    for r in range(count):
-        myalpha = alphas[r]
-        vec=svm['support_vectors'][r]
-        for j,v in enumerate(vec):
-            support_vector[j]+=(-myalpha)*(v)
-    support_vector.append(rho)
-    return np.array(support_vector)
-        
-
 if __name__ == '__main__':
-    from glob import glob
-    import itertools as it
-
-
     p = argparse.ArgumentParser("detectarcabezas.py")
     p.add_argument("imagen",default=None,
             action="store", help="image to detect")
@@ -54,9 +27,6 @@ if __name__ == '__main__':
 
 
     hog = cv2.HOGDescriptor((48,48),(16,16),(8,8),(8,8),9)
-
-    with open(opts.model, 'r') as f:
-         data = load(f)
 
     vals=[]
     for line in open(opts.model):

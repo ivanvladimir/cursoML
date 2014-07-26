@@ -40,7 +40,7 @@ if __name__ == '__main__':
     img = cv2.imread(opts.imagen)
 
     found, w = hog.detectMultiScale(img,
-            hitThreshold = 1.4,
+            hitThreshold = .3,
             winStride=(8,8),
             padding=(0,0),
             scale=1.04)

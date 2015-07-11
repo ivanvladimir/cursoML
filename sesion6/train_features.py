@@ -27,7 +27,6 @@ hog = cv2.HOGDescriptor((48,48),(16,16),(8,8),(8,8),9)
 
 
 trainData=[]
-responses=[]
 print "Generating samples"
 for filename in listing:
     # Se abre la imagen
@@ -35,8 +34,7 @@ for filename in listing:
     #gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
     des=hog.compute(img)
-    trainData.append(des)
-    responses.append(1)
+    trainData.append((des,1))
 
 
 listing=os.listdir(opts.negativos)
@@ -44,6 +42,7 @@ listing=["{0}/{1}".format(opts.negativos,namefile)
                         for namefile in listing if namefile.endswith('jpg') 
                                                 or namefile.endswith('png')]
 
+print len(trainData)
 print "Generating samples"
 for filename in listing:
     # Se abre la imagen
@@ -59,20 +58,23 @@ for filename in listing:
         sample_img=img[h:h+48,w:w+48]
 
         des=hog.compute(sample_img)
-        trainData.append(des)
-        responses.append(0)
+        trainData.append((des,0))
+
+random.shuffle(trainData)
+trainData,responses=zip(*trainData)
 
 
+print len(responses)
 print "Training"
 svm_params = dict( kernel_type = cv2.SVM_LINEAR,
-                   svm_type = cv2.SVM_C_SVC,
-                   C=2.67, gamma=5.383 )
+                   svm_type = cv2.SVM_NU_SVC,
+                   C=2.67, gamma=5.383, nu=0.1 )
 
 svm = cv2.SVM()
 
 trainData= np.float32(trainData).reshape(-1,900)
 responses= np.float32(responses)
-svm.train_auto(trainData,responses,None,None,params=svm_params,k_fold=3)
+svm.train_auto(trainData,responses,None,None,params=svm_params,k_fold=10)
 
 svm.save(opts.model)
 

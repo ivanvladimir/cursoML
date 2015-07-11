@@ -2,8 +2,8 @@ import random
 
 random.seed()
 
-tries=10
-bias=.8
+tries=1
+bias=.5
 coins=[]
 
 for i in range(tries):
@@ -13,5 +13,5 @@ for i in range(tries):
     else:
         coins.append('a')
 
-print coins
+print coins[0]
 

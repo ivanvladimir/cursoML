@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     X_test=[]
     Y_test=[]
-    for line in open(opts.TRAINIG):
+    for line in open(opts.TESTING):
         line=line.strip()
         bits=line.rsplit(" ", 1)
         X_test.append(bits[0])
@@ -54,4 +54,5 @@ if __name__ == "__main__":
     clf.fit(X_train, Y_train)
 
     Y_pred=clf.predict(X_test)
+    print(clf.score(X_test,Y_test))
     print(classification_report(Y_test, Y_pred))

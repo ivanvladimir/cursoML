@@ -18,10 +18,10 @@ if __name__ == "__main__":
     p.add_argument("-t", "--train",default=0.7,
             action="store", dest="train",
             help="Percentage of document for training [0.7]")
-    p.add_argument("-s", "--size",default=500,
+    p.add_argument("-s", "--size",default=500,type=int,
             action="store", dest="size",
             help="Number of tokens in segment [500]")
-    p.add_argument("-j", "--jump",default=250,
+    p.add_argument("-j", "--jump",default=250,type=int,
             action="store", dest="jump",
             help="Skip size betweent tokens [250]")
     p.add_argument("-v", "--verbose",

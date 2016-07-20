@@ -20,11 +20,11 @@ verbose = lambda *a: None
 keepcharacters = (' ','.','_')
 
 class Collector(StreamListener):
-    """Custom StreamListener for streaming data."""
 
     def __init__(self, output_dir, query="#ironia", lang="es"):
         query_="".join(c for c in query if c.isalnum() or c in keepcharacters).rstrip()
-        self.oufile=os.path.join(output_dir,lang+"_"+query_)
+        self.outfile=os.path.join(output_dir,lang+"_"+query_+".txt")
+        verbose("Output file set to:", self.outfile)
 
     def on_data(self, data):
         try:
@@ -69,4 +69,4 @@ if __name__ == '__main__':
     api = tweepy.API(auth)
 
     twitter_stream = Stream(auth, Collector(opts.data_dir, opts.query, opts.lang))
-    twitter_stream.filter(track=[opts.query],languages=[opts.lang])
+    twitter_stream.filter(track=[u'ironia'],languages=[opts.lang])

@@ -19,37 +19,16 @@ import os
 verbose = lambda *a: None 
 keepcharacters = (' ','.','_')
 
-class Collector(StreamListener):
-
-    def __init__(self, output_dir, query="#ironia", lang="es"):
-        query_="".join(c for c in query if c.isalnum() or c in keepcharacters).rstrip()
-        self.outfile=os.path.join(output_dir,"stream_"+lang+"_"+query_+".txt")
-        verbose("Output file set to:", self.outfile)
-
-    def on_data(self, data):
-        try:
-            with open(self.outfile, 'a') as f:
-                f.write(data)
-                verbose(data)
-                return True
-        except BaseException as e:
-            print("Error on_data: %s" % str(e))
-            time.sleep(5)
-        return True
-
-    def on_error(self, status):
-        print(status)
-        return True
-
-
 if __name__ == '__main__':
     # Command line options
-    p = argparse.ArgumentParser("Twitter collector")
+    p = argparse.ArgumentParser("Twitter search")
     p.add_argument("-q", "--query", dest="query",nargs="+",
                     help="Query/Filter",default='#ironia')
     p.add_argument("-l", "--lang", dest="lang",
                     help="Language",default='es')
-    p.add_argument("-d","--data-dir",dest="data_dir",
+    p.add_argument("-i","--items",dest="nitems",type=int,
+                   help="Maximum number of tweets to recover", default=1000)
+    p.add_argument("-d","--output-dir",dest="output_dir",
                    help="Output/Data Directory", default='.')
     p.add_argument("-v", "--verbose",
             action="store_true", dest="verbose",
@@ -64,9 +43,22 @@ if __name__ == '__main__':
     else:   
         verbose = lambda *a: None 
 
+    query_="".join(c for c in opts.query if c.isalnum() or c in keepcharacters).rstrip()
+    outfile=os.path.join(opts.output_dir,"results_"+opts.lang+"_"+query_+".txt")
+    verbose("Output file set to:", outfile)
+
+
     auth = OAuthHandler(config.consumer_key, config.consumer_secret)
     auth.set_access_token(config.access_token, config.access_secret)
     api = tweepy.API(auth)
 
-    twitter_stream = Stream(auth, Collector(opts.data_dir, opts.query, opts.lang))
-    twitter_stream.filter(track=[x.decode('unicode-escape') for x in opts.query],languages=[opts.lang])
+    with open(outfile, 'a') as f:
+        for tweet in tweepy.Cursor(api.search,
+                           q=[x.decode('unicode-escape') for x in opts.query],
+                           rpp=100,
+                           result_type="recent",
+                           languages=[opts.lang]).items(opts.nitems):
+                jtweet=json.dumps(tweet._json)
+                verbose(jtweet)
+                f.write(jtweet)
+        
